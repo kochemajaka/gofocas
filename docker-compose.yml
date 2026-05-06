@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # ── Example 01: connect & print system info ──────────────────────────────
+  01-connect:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: focas-01-connect
+    command: ["/app/examples/01-connect"]
+    environment:
+      FOCAS_ADDR: ${FOCAS_ADDR:-192.168.1.1}
+    profiles: [connect]
+
+  # ── Example 02: read axis positions ──────────────────────────────────────
+  02-read-position:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: focas-02-read-position
+    command: ["/app/examples/02-read-position"]
+    environment:
+      FOCAS_ADDR: ${FOCAS_ADDR:-192.168.1.1}
+    profiles: [position]
+
+  # ── Example 03: read alarms ───────────────────────────────────────────────
+  03-read-alarms:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: focas-03-read-alarms
+    command: ["/app/examples/03-read-alarms"]
+    environment:
+      FOCAS_ADDR: ${FOCAS_ADDR:-192.168.1.1}
+    profiles: [alarms]
+
+  # ── Example 04: parallel read ─────────────────────────────────────────────
+  04-parallel-read:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: focas-04-parallel-read
+    command: ["/app/examples/04-parallel-read"]
+    environment:
+      FOCAS_ADDR: ${FOCAS_ADDR:-192.168.1.1}
+    profiles: [parallel]
+
+  # ── Example 05: Prometheus metrics stream ────────────────────────────────
+  05-stream-prometheus:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: focas-05-prometheus
+    command: ["/app/examples/05-stream-prometheus"]
+    environment:
+      FOCAS_ADDR: ${FOCAS_ADDR:-192.168.1.1}
+    ports:
+      - "${PROMETHEUS_PORT:-9090}:9090"
+    profiles: [prometheus]
+
+  # ── Example 06: multi-machine ─────────────────────────────────────────────
+  06-multi-machine:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: focas-06-multi
+    command: ["/app/examples/06-multi-machine"]
+    environment:
+      FOCAS_ADDRS: ${FOCAS_ADDRS:-192.168.1.1,192.168.1.2}
+    profiles: [multi]

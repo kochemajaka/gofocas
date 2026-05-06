@@ -1,0 +1,33 @@
+#ifndef C_HELPERS_H
+#define C_HELPERS_H
+
+#include "fwlib32.h"
+
+short go_cnc_startupprocess(unsigned short mode, const char* logpath);
+short go_cnc_allclibhndl3(const char* ip, unsigned short port, long timeout_ms, unsigned short* handle_out);
+short go_cnc_freelibhndl(unsigned short h);
+short go_cnc_exeprgname(unsigned short h, char* name_out, int name_cap, long* onum_out);
+short go_cnc_statinfo(unsigned short h, ODBST* stat_out);
+short go_cnc_sysinfo(unsigned short h, ODBSYS* sys_info_out);
+short go_cnc_rdaxisname(unsigned short h, short axis, ODBAXISNAME* axisname_out);
+short go_cnc_absolute(unsigned short h, short axis, short length, ODBAXIS* axis_out);
+short go_cnc_relative(unsigned short h, short axis, short length, ODBAXIS* axis_out);
+short go_cnc_machine(unsigned short h, short axis, short length, ODBAXIS* axis_out);
+short go_cnc_rdposition(unsigned short h, short type, short* data_num, ODBPOS* position);
+short go_cnc_upstart(unsigned short h, short prog_num);
+short go_cnc_getpath(unsigned short h, short* path_no, short* maxpath_no);
+short go_cnc_upstart4(unsigned short h, short type, const char* file_name);
+short go_cnc_upload(unsigned short h, ODBUP* data_out, unsigned short* len);
+short go_cnc_upend(unsigned short h);
+short go_cnc_rdexecprog(unsigned short h, unsigned short* length, short* blknum, char* data);
+short go_cnc_rdsvmeter(unsigned short h, short* axis_num, ODBSVLOAD* loadmeter);
+short go_cnc_diagnoss(unsigned short h, short diag_no, short axis_num, short length, ODBDGN* diag_out);
+short go_cnc_rdspmeter(unsigned short h, short type, short* num, ODBSPLOAD* meter_out);
+short go_cnc_rdspeed(unsigned short h, short type, ODBSPEED* speed_out);
+short go_cnc_rdspload(unsigned short h, short type, ODBSPN* load_out);
+short go_cnc_rdalmmsg(unsigned short h, short type, short* num, ODBALMMSG* msg);
+short go_cnc_rdparam(unsigned short h, short prm_no, short axis_no, short length, IODBPSD* param_out);
+short go_cnc_actf(unsigned short h, ODBACT* actualfeed);
+short go_cnc_rdtofs(unsigned short h, short number, short type, short length, ODBTOFS* tofs);
+
+#endif // C_HELPERS_H
